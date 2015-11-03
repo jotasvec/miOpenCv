@@ -184,7 +184,7 @@ class GTK_Main:
 
 		# Configurando la tuberia gstreamer para aplicar los filtro de video "normal" , "bulge" , "square" , "fisheye", etc. + logo UCT
 
-		self.player0 = gst.parse_launch ("v4l2src device=/dev/video1   !   alpha method=0 alpha=1   !   mezclador.   multifilesrc location=logouct1.png caps=image/png,framerate=1/1   !   pngdec   !   videobox border-alpha=0 alpha=.6 top=-380 left=-470   ! mezclador.   videomixer name=mezclador   !   videorate   !   ffmpegcolorspace   !   video/x-raw-yuv   !   v4l2sink device=/dev/video0 sync=false  ")  
+		self.player0 = gst.parse_launch ("v4l2src device=/dev/video0   !   alpha method=0 alpha=1   !   mezclador.   multifilesrc location=logouct1.png caps=image/png,framerate=1/1   !   pngdec   !   videobox border-alpha=0 alpha=.6 top=-380 left=-470   ! mezclador.   videomixer name=mezclador   !   videorate   !   ffmpegcolorspace   !   video/x-raw-yuv   !   v4l2sink device=/dev/video0 sync=false  ")  
 
 		self.player1 = gst.parse_launch ("v4l2src device=/dev/video1   !   alpha method=0 alpha=1   !   mezclador.   multifilesrc location=logouct1.png caps=image/png,framerate=1/1   !   pngdec   !   videobox border-alpha=0 alpha=.6 top=-380 left=-470   ! mezclador.   videomixer name=mezclador   !   bulge   !   videorate   !   ffmpegcolorspace   !   video/x-raw-yuv   !   v4l2sink device=/dev/video0 sync=false  ")    
 

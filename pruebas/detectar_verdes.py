@@ -20,7 +20,7 @@ captura = cv2.VideoCapture(0) #se abre la camara y se guardan los datos leidos e
 #se crea un bucle infinito
 
 while(1):
-	_, imagen = captura.read() #se leen los frames y se guardan en imagen
+	ret, imagen = captura.read() #se leen los frames y se guardan en imagen
 	hsv = cv2.cvtColor(imagen, cv2.COLOR_BGR2HSV) #se cambia la imagen RGB a HSV de esta forma es mas facil analizar la imagen
 
 #tercero, se buscan los lados verdes
@@ -35,37 +35,37 @@ while(1):
 	mask = cv2.inRange(hsv, verdes_bajos, verdes_altos) #crea una imagen blanco y negro poniendo en blanco todo lo verde
 
 #cuarto, se elimina el ruido de la imagen para dejarla mas definida
+	
+	kernel = np.ones((7,7), np.uint8)
+	
+	# refina el ruido externo a las regiones blancas correspondientes
+	#primero se aplica un poco de erosion para reducir las zonas en con blanco
 
-	moments = cv2.moments(mask) # esta funcion da como salida un diccionario del cual se necita el valor 'm00' 
-	area = moments['m00'] #para ver como queda ->print area
+	# refina el ruido externo a las regiones blancas correspondientes
+	opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+	cv2.imshow('img opening', opening)
 
-#para eliminar el ruido, leer manual
+	#se produce dilatacion para mejorar los bordesen el cambio de blanco a negro en la maskara 
+	dilation = cv2.dilate(opening,kernel, iterations=1)
 
-	if(area > 20000000):
-		#se buscan los centros
-		x = int(moments['m10']/moments['m00'])
-		y = int(moments['m01']/moments['m00'])
+	blur = cv2.GaussianBlur(dilation, (5,5),0)
+	ret1, thBlur = cv2.threshold(blur, 0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+	cv2.imshow('img blur gaussian effect',thBlur)
 
-		#se escriben los valores de los centros de x e y
-
-		print "x = ", x
-		print "y = ", y
-
-		#se dibuja en el centro un rectangulo rojo
-		cv2.rectangle(imagen, (x,y),(x+2,y+2), (0,0,255), 2) #revisar que pasa con esto
-
-#se muestran las imagenes
+	#se se invierte la mascara para mostrar los verdes en negro con la aplicacion de filtros 
+	mask2 = cv2.bitwise_and(imagen, imagen, mask= ~thBlur)
 
 #se muetsran 2 ventanas, la primera es la imagen original luego la en blanco y negro
-
-	cv2.imshow('mask', mask)
+	cv2.imshow('mask2', mask2)
 	cv2.imshow('camara', imagen)
 
 #para cerrar el programa usando escape
 
-	tecla = cv2.waitkey(5) & 0xFF
+	tecla = cv2.waitKey(5) & 0xFF
 	if tecla == 27:
 		break
+
+
 cv2.destroyAllWindows()
 
 #revisar bien el programa como funciona y complementarlo.
