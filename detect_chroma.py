@@ -62,7 +62,7 @@ def greenScreen(imgFg, imgBg, output='img/imageTest.png', keyColor = None, toler
 	#creando el color de la mascara verde
 	colorMask.paste(allGreen, mask_img_inv)
 
-	#convertir la imagen a RGB 
+	#convertir la imagen a RGB
 	img_fg = img_fg.convert('RGB')
 
 	#sustraer verdes de la entrada
@@ -74,18 +74,18 @@ def greenScreen(imgFg, imgBg, output='img/imageTest.png', keyColor = None, toler
 	#mostrar imagen final
 	#img_bg.show()
 
-	#guardar 
+	#guardar
 	img_bg.save(output,"PNG")
 
 def colorClose(Cb_p,Cr_p, Cb_key, Cr_key, tola, tolb):
-    temp = math.sqrt((Cb_key-Cb_p)**2+(Cr_key-Cr_p)**2)
-    if temp < tola:
-        z= 0.0
-    elif temp < tolb:
-        z= ((temp-tola)/(tolb-tola))
-    else:
-        z= 1.0
-    return 255.0*z 
+	temp = math.sqrt((Cb_key-Cb_p)**2+(Cr_key-Cr_p)**2)
+	if temp < tola:
+		z= 0.0
+	elif temp < tolb:
+		z= ((temp-tola)/(tolb-tola))
+	else:
+		z= 1.0
+	return 255.0*z
 
 def ajustarImagen(imgFg, imgBg):
 	img_fg = cv2.imread(imgFg)
@@ -106,7 +106,7 @@ def ajustarImagen(imgFg, imgBg):
 	if size_fg > size_bg:
 		img_fg2 = cv2.resize(img_fg, (y,x))
 		print "tamaño nuevo fg ", img_fg2.shape
-		cv2.imshow('tamaño nuevo', img_fg2)	
+		cv2.imshow('tamaño nuevo', img_fg2)
 
 	ifg2 = Image.fromarray(img_fg2,'RGB') #pasar de cv2 a PIL.Image
 	ifg2.show()

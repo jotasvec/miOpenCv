@@ -1,18 +1,17 @@
 #usoCamCv2.py
 
 import cv2
-import numpy as np #libreria numpy
-import gst
+import numpy as np
 
 cv2.namedWindow('webCam')
-cap = cv2.VideoCapture(0)
-
+cap = cv2.VideoCapture()
+cap.open("http://admin:123456@pcmix.dyndns.org:8080")
 
 #capture frame por frame
 #set width
-ret = cap.set(3,480)
+#ret = cap.set(3,480)
 #set Height
-ret = cap.set(4,360)
+#ret = cap.set(4,360)
 
 #cv2.namedWindow('mask')
 #cv2.namedWindow('res')
@@ -31,7 +30,7 @@ else:
 
 
 while True:
-	#se toma cada frame 
+	#se toma cada frame
 	ret,frame = cap.read()
 	#convertir de rgb a hsv
 	#hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -41,6 +40,7 @@ while True:
 
 	#bitwise and y mask
 	#res = cv2.bitwise_and(frame, frame, mask = mask)
+
 	cv2.imshow('webCam', frame)
 	#cv2.imshow('mask', mask)
 	#cv2.imshow('res', res)

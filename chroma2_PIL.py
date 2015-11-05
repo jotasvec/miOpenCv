@@ -91,7 +91,7 @@ while(True):
     im_bw_inv = cv2.GaussianBlur(im_bw_inv,(1,1),0)
     im_bw_inv = cv2.morphologyEx(im_bw_inv, cv2.MORPH_CLOSE, kernel)
 
-    background2 = background.shape[:2]
+    
     roi = cv2.bitwise_and(background2,background2,mask = im_bw_inv)
     im = cv2.bitwise_and(frame,frame,mask = im_bw)
  

@@ -152,7 +152,7 @@ class VentanaWebcam(wx.Frame):
 
         # toma los rangos de verdes en hsv
         mask = cv2.inRange(hsv, bajosrb, altosrb)
-        # para refinar la maskara se le aplica la operacion morfologica openig
+        # para refinar la maskara se le aplica la operacion morfologica openig y creamo un kernel
         kernel = np.ones((5, 5), np.uint8)
         # refina el ruido externo a las regiones blancas correspondientes
         opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
@@ -164,7 +164,6 @@ class VentanaWebcam(wx.Frame):
 
         # invierte los colores de la mascara
         mask2 = cv2.bitwise_and(frame, frame, mask=~opening)
-        
         mask2_inv = cv2.cvtColor(mask2, cv2.COLOR_BGR2RGB)
         # muestra la mascara invertida y en color RGB y con el verde en negro
         cv2.imshow('mask2 cvt rgb', mask2_inv)
