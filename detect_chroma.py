@@ -10,7 +10,7 @@ import cv2
 #import ajustarImagen
 
 
-def greenScreen(imgFg, imgBg, output='img/imageTest.png', keyColor = None, tolerance = None):
+def greenScreen(imgFg, imgBg, output='img/imageTest.png', keyColor=None, tolerance=None):
 	img = ajustarImagen(imgFg, imgBg)
 	#se abre un archivo
 	img_fg = img.convert('YCbCr')#Image.open(img).convert('YCbCr')

@@ -20,7 +20,7 @@ cv2.createTrackbar('G','image', 0,255,nothing)
 cv2.createTrackbar('B','image', 0,255,nothing)
 
 
-#se crea switch para prender y apagar 
+#se crea switch para prender y apagar
 
 switch = '0 : OFF \n1 : ON'
 cv2.createTrackbar(switch, 'image', 0, 1,nothing)

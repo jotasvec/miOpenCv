@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 
 #resize a image
-
-import Image
 import cv2
-import numpy as np
-import cv
 
 #se abre una imagen
 
 img_fg = cv2.imread("img/dudegreen.jpg")
 img_bg = cv2.imread("img/imagen.png")
 
-size_bg = img_bg.shape[:2] #obtenemos el ancho largo y canal? de la imagen
+size_bg = img_bg.shape[:2]   # obtenemos el ancho largo y canal? de la imagen
 size_fg = img_fg.shape[:2]
 
 cv2.imshow("imagen1", img_bg)

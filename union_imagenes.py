@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 """
 jugando con union de imagen
-primero -> lo comentado al final es la union de las imagenes en una sobre otra, 
+primero -> lo comentado al final es la union de las imagenes en una sobre otra,
 el logo de opencv se pone encima de otra imagen
 
 el codigo que no esta comentado es una prueba usando trackbars mostrando la union
 de dos imagenes con transparencia, el trackbar maneja la transparencia de ambas imagenes.
 por ende una se sobrepone a otra de acuerdo a su transparencia
-con el comando 
+con el comando
 	dst= cv2.addWeighted(img1, 0.7, img2, 0.3, 0)
 se logra la union de las 2 imagenes
 """
@@ -40,13 +40,13 @@ cv2.createTrackbar('img2', 'pruebaConTrackbar', 0, 100, nothing)
 
 
 while True:
-	valorTb1 = float(cv2.getTrackbarPos('roi', 'pruebaConTrackbar'))/100	
+	valorTb1 = float(cv2.getTrackbarPos('roi', 'pruebaConTrackbar'))/100
 	valorTb2 = float(cv2.getTrackbarPos('img2', 'pruebaConTrackbar'))/100
 	
 	print "valor1 = ", valorTb1
 	print "valor2 = ", valorTb2
 
-	dst1= cv2.addWeighted(roi, valorTb1, img2, valorTb2 , 0)
+	dst1= cv2.addWeighted(roi, valorTb1, img2, valorTb2, 0)
 	cv2.imshow('dst1', dst1)
 
 

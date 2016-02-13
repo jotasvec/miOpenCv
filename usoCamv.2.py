@@ -24,7 +24,7 @@ class Main:
 
 		fScreen = gtk.AboutDialog()
 
-		fScreen.set_program_name("nombre del programa aqui")#nombre del programa
+		fScreen.set_program_name("nombre del programa aqui")  # nombre del programa
 
 		fScreen.set_version("aqui la version 0.1") #version del programa
 

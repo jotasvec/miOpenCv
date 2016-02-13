@@ -1,7 +1,0 @@
-cosas que se deben ir haciendo.
-
-
-	-revisar en que consiste Wirecast
-	-estudiar el estado del arte en Estudios virtuales en GNU/Linux, 
-
-Se escribe y se lo mando al profe.

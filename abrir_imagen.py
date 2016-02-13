@@ -34,9 +34,4 @@ cv2.imshow('mask color', mask_color)#cambio de color
 
 k = cv2.waitKey(0) & 0XFF
 if k == 27:
-	cerrarVentana()
-
-
-
-def cerrarVentana():
 	cv2.destroyAllWindows()

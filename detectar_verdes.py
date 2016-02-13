@@ -11,15 +11,21 @@ para reconocer y marcar un objeto de un color determinado.
 #se cargan las librerias para capturar imagen
 import cv2
 import numpy as np
-#se abre la camara y se guardan los datos leidos en captura
 
+#se abre la camara y se guardan los datos leidos en captura
 captura = cv2.VideoCapture(0)
-background = cv2.imread('img/imagen.png')
+
+capVideo = cv2.VideoCapture()
+capVideo.open("img/bg.avi")
+print "a ver cuanto es -> ", capVideo.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT)
+#background = cv2.imread('img/imagen.png')
 
 #se crea un bucle infinito
 while(1):
 	#se leen los frames y se guardan en imagen
 	ret, imagen = captura.read()
+	ret2, background = capVideo.read()
+
 	#voltea la imagen
 	imagen = cv2.flip(imagen,1,imagen)
 	#se cambia la imagen RGB a HSV de esta forma es mas facil analizar la imagen
@@ -54,7 +60,7 @@ while(1):
 	mask_inv = cv2.bitwise_not(mask)
 	mask_inv = cv2.GaussianBlur(mask_inv, (5,5),0)
 	mask_inv = cv2.morphologyEx(mask_inv, cv2.MORPH_OPEN,kernel)
-	
+
 
 	size_bg = background.shape[:2]
 	size_ibi = mask_inv.shape[:2]
@@ -64,15 +70,13 @@ while(1):
 		background = cv2.resize(background,(y,x))
 	#se crea la maskra de roi (region de interes)
 	roi= cv2.bitwise_and(background,background, mask=~mask_inv)
-	
+
 	#mascara final de la imagen de webcam
 	mask = cv2.bitwise_and(imagen, imagen, mask=~mask)
-	
-
 
 	final = cv2.add(roi,mask)
 	#se muetsran 2 ventanas, la primera es la imagen original luego la en blanco y negro
-	
+	print "posicion video -> ", capVideo.get(cv2.cv.CV_CAP_PROP_POS_FRAMES)
 	#muestra imagen normal
 	cv2.imshow('camara', imagen)
 	#muestra resultado con chroma
@@ -87,4 +91,5 @@ while(1):
 		break
 
 captura.release()
+capVideo.release()
 cv2.destroyAllWindows()
